@@ -36,34 +36,7 @@ public class Deck {
 
 	}
 	
-	public Deck(int NbrOfJokers) {
 
-		this();
-		
-		for (short i = 1; i <= NbrOfJokers; i++) {
-			cards.add(new Card(eSuit.JOKER,eRank.JOKER,53));
-		}
-		ShuffleCards();
-	}
-	
-	public Deck(int NbrOfJokers, ArrayList<Card> WildCards) {
-
-		this(NbrOfJokers);
-		
-		
-		for (Card deckCard : cards)
-		{
-			for (Card WildCard: WildCards)
-			{
-				if ((deckCard.getSuit() == WildCard.getSuit()) &&
-						(deckCard.getRank() == WildCard.getRank()))
-						{
-							deckCard.setWild();
-						}					
-			}
-		}
-		ShuffleCards();
-	}
 	
 	private void ShuffleCards()
 	{

@@ -2,6 +2,9 @@ package pokerBase;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,6 +32,21 @@ public class Hand_Test {
 
 	@After
 	public void tearDown() throws Exception {
+	}
+	
+	@Test
+	public void FiveOfAKind() {
+		Deck d = new Deck();
+		Hand h = new Hand();
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0));
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0));
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0));
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0));
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0));
+		h.EvalHand();
+		
+		assertTrue(h.getHandStrength() == eHandStrength.FiveOfAKind.getHandStrength());
+		
 	}
 
 	@Test
@@ -321,6 +339,41 @@ public class Hand_Test {
 		assertTrue(c4.getRank().getRank() == eRank.TWO.getRank());
 
 	}		
+	
+	
+	@Test
+	public void CompareTwoHands() {
+		Deck d = new Deck();
+		Hand h1 = new Hand();
+		h1.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0));
+		h1.AddCardToHand(new Card(eSuit.DIAMONDS,eRank.TEN,0));
+		h1.AddCardToHand(new Card(eSuit.SPADES,eRank.TEN,0));
+		h1.AddCardToHand(new Card(eSuit.HEARTS,eRank.TWO,0));
+		h1.AddCardToHand(new Card(eSuit.CLUBS,eRank.ACE,0));
+		h1.EvalHand();
+		
+		Hand h2 = new Hand();
+		h2.AddCardToHand(new Card(eSuit.CLUBS,eRank.NINE,0));
+		h2.AddCardToHand(new Card(eSuit.DIAMONDS,eRank.NINE,0));
+		h2.AddCardToHand(new Card(eSuit.SPADES,eRank.NINE,0));
+		h2.AddCardToHand(new Card(eSuit.HEARTS,eRank.NINE,0));
+		h2.AddCardToHand(new Card(eSuit.CLUBS,eRank.ACE,0));
+		h2.EvalHand();	
+		
+		ArrayList<Hand> TwoHands = new ArrayList<Hand>();
+		TwoHands.add(h1);
+		TwoHands.add(h2);
+		
+		Collections.sort(TwoHands,Hand.HandRank);
+		
+		Hand winningHand = new Hand();
+		
+		winningHand = TwoHands.get(0);
+		
+		assertTrue(winningHand.getHandStrength() == eHandStrength.FourOfAKind.getHandStrength());
+		assertTrue(winningHand.getHighPairStrength() == eRank.NINE.getRank());
+		
+	}	
 }
 
 
