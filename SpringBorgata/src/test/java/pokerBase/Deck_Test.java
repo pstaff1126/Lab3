@@ -28,10 +28,23 @@ public class Deck_Test {
 
 	@Test
 	public void TestFullDeck() {
-		//	I put this test in so it would pass...
-		//TODO: Code a unit test to make sure calling the deck constructor passes back 52 cards in a deeck.
-		
-		assertTrue(1==1);
+		int iDeckSize = 52;
+		Deck d = new Deck();
+		assertTrue(d.getTotalCards() == iDeckSize);		
 	}
+	
+	@Test
+	public void DrawOne() {
+		int iDeckSize = 52;
+		int iDeckSizeDrawOne = 51;
+		
+		Deck d = new Deck();
+		assertTrue(d.getTotalCards() == iDeckSize);
+		d.drawFromDeck();
+		
+		assertTrue(d.getTotalCards() == iDeckSizeDrawOne);
+		
+	}
+	
 
 }
