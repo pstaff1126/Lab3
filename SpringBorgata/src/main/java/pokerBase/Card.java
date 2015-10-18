@@ -37,6 +37,7 @@ public final class Card {
 		this.CardImg = CardNbr + ".png";
 		
 	}
+	
 
 	public Card(eSuit suit, eRank rank, boolean Wild) {
 		Suit = suit; 

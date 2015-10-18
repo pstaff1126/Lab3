@@ -42,15 +42,14 @@ public class Hand_Test {
 		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0));
 		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0));
 		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0));
-		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0));
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.JOKER,0));
 		h.EvalHand();
 		
 		assertTrue(h.getHandStrength() == eHandStrength.FiveOfAKind.getHandStrength());
 		
 	}
-
 	@Test
-	public void RoyalFlush() {
+	public void NaturalRoyalFlush() {
 		Deck d = new Deck();
 		Hand h = new Hand();
 		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0));
@@ -58,6 +57,23 @@ public class Hand_Test {
 		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.QUEEN,0));
 		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.KING,0));
 		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.ACE,0));
+		h.EvalHand();
+		
+		assertTrue(h.getHandStrength() == eHandStrength.NaturalRoyalFlush.getHandStrength());
+		
+	}
+
+	@Test
+	// this test fails because joker does not become an ace, it becomes a ten
+	// need to make joker become a straight if its possible instead of making it the highest rank
+	public void RoyalFlush() {
+		Deck d = new Deck();
+		Hand h = new Hand();
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0));
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.JACK,0));
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.QUEEN,0));
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.KING,0));
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.JOKER,0));
 		h.EvalHand();
 		
 		assertTrue(h.getHandStrength() == eHandStrength.RoyalFlush.getHandStrength());

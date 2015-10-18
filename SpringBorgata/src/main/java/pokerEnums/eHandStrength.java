@@ -1,6 +1,11 @@
 package pokerEnums;
 
 public enum eHandStrength {
+	NaturalRoyalFlush(120) {
+		public String toString() {
+			return "Natural Royal Flush";
+		}
+	},
 
 	FiveOfAKind(110){
 		public String toString()

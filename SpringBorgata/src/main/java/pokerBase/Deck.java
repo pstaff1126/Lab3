@@ -17,7 +17,7 @@ public class Deck {
 	
 	@XmlElement (name="Remaining Card")
 	private ArrayList<Card> cards;
-
+	private int Jokers=0;
 	public Deck() {
 
 		//	Create an ArrayList of Cards, add each card
@@ -35,7 +35,29 @@ public class Deck {
 		ShuffleCards();
 
 	}
-	
+	public Deck(int jokers) {
+		this.Jokers=jokers;
+//		Create an ArrayList of Cards, add each card
+			ArrayList<Card> MakingDeck = new ArrayList<Card>();
+			for (short i = 0; i <= 3; i++) {
+				eSuit SuitValue = eSuit.values()[i];			
+				for (short j = 0; j <= 12; j++) {
+					eRank RankValue = eRank.values()[j];				
+					Card NewCard = new Card(SuitValue,RankValue, (13 * i) + j+1);
+					MakingDeck.add(NewCard);
+				}
+			}
+			//	Set the instance variable
+			for(int i=0; i<jokers; i++) {
+				
+			
+			MakingDeck.add(new Card(eSuit.JOKER,eRank.JOKER,52+i+1));
+			}
+			cards = MakingDeck;
+			
+			ShuffleCards();
+		
+	}
 
 	
 	private void ShuffleCards()
@@ -80,4 +102,6 @@ public class Deck {
     
     return sw;
 	}
+	
+
 }
